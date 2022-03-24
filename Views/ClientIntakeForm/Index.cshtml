@@ -1,0 +1,21 @@
+﻿
+@model System.Collections.Generic.IEnumerable<HairSalonJF.Models.ClientIntakeForm>
+
+<h1>Intake Form</h1>
+<h1>Please fill out this form if you are a new client!</h1>
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Name) </th>
+        <th>@Html.DisplayNameFor(model => model.CurrentHairStyle) </th>
+        <th>@Html.DisplayNameFor(model => model.SpecialAccomidations) </th>
+    </tr>
+
+    @foreach(var Item in Model)
+            {
+<tr>
+    <td>@Html.DisplayFor(modelItem => Item.Name)</td>
+    <td>@Html.DisplayFor(modelItem => Item.CurrentHairStyle)</td>
+    <td>@Html.DisplayFor(modelItem => Item.SpecialAccomidations)</td>
+</tr>
+            }
+</table>
