@@ -12,7 +12,7 @@ namespace HairSalonJF.Models
         public string CurrentHairStyle { get; set; }
         public string SpecialAccomidations { get; set; }
 
-           
+       // public int Id { get; set; }
         
     }
 }

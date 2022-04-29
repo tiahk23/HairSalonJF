@@ -9,6 +9,8 @@ namespace HairSalonJF.Controllers
 {
     public class ClientIntakeFormController : Controller
     {
+        public object Id { get; internal set; }
+
         [HttpGet]
         [Route("/ClientIntakeForm/")]
         public IActionResult Index()
