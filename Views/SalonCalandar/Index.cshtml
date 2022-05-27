@@ -1,0 +1,37 @@
+﻿<div id="scheduler"></div>
+
+<script src="~/lib/daypilot/daypilot-all.min.js"></script>
+
+<script>
+
+const scheduler = new DayPilot.Scheduler("scheduler", {
+    scale: "Manual",
+    timeline: app.getTimeline(),        // the timeline is generated dynamically, depending on the selected scale
+    timeHeaders: app.getTimeHeaders(),  // headers are generated dynamically, depending on the selected scale
+    allowEventOverlap: false,
+    eventDeleteHandling: "Update",
+    eventClickHandling: "Disabled",
+    eventMoveHandling: "Disabled",
+    eventResizeHandling: "Disabled",
+    // ...
+    onTimeRangeSelected: async (args) => {
+        const dp = scheduler;
+        const scale = app.elements.scaleChecked.value;
+
+        const params = {
+            start: args.start.toString(),
+            end: args.end.toString(),
+            resource: args.resource,
+            scale: scale
+        };
+
+        dp.clearSelection();
+
+        const {data} = await DayPilot.Http.post("/api/appointments/create", params);
+        app.loadEvents();
+        //dp.message(data.message);
+    }
+});
+scheduler.init();
+
+</script>

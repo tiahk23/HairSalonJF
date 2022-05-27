@@ -10,6 +10,7 @@ namespace HairSalonJF.Models
     {
         public IActionResult Index()
         {
+
             return View();
         }
     }

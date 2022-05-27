@@ -1,12 +1,18 @@
 ﻿@model System.Collections.Generic.IEnumerable<HairSalonJF.Models.ClientIntakeForm>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
 <h1>Intake Form</h1>
-<h1>Please fill out this form if you are a new client!</h1>
+
+@if (SignInManager.IsSignedIn(User))
+//make sure this is changed to Jackies User name/email
+{
 <table class="table">
     <tr>
-        <th>@Html.DisplayNameFor(model => model.Name) </th>
-        <th>@Html.DisplayNameFor(model => model.CurrentHairStyle) </th>
-        <th>@Html.DisplayNameFor(model => model.SpecialAccomidations) </th>
+        <th>Name</th>
+        <th>Current Hairstyle</th>
+        <th>Special Accomidations</th>
     </tr>
 
     @foreach (var Item in Model)
@@ -18,3 +24,30 @@
         </tr>
     }
 </table>
+}
+else if (SignInManager.IsSignedIn(User))
+//make sure this is changed to be not jackies sign in and only customer sign in
+{
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Current Hairstyle</th>
+        <th>Special Accomidations</th>
+    </tr>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Name) </th>
+        <th>@Html.DisplayNameFor(model => model.CurrentHairStyle) </th>
+        <th>@Html.DisplayNameFor(model => model.SpecialAccomidations) </th>
+    </tr>
+
+
+
+</table>
+}
+else
+{
+    <h1>Please register if you are a new client.</h1>
+    <a asp-area="Identity" asp-page="/Account/Register">Register</a>
+    <h1>If you are a returning client please Log in.</h1>
+    <a asp-area="Identity" asp-page="/Account/Login">Login</a>
+}

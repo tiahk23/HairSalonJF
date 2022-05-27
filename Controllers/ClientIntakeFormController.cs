@@ -15,8 +15,6 @@ namespace HairSalonJF.Controllers
         [Route("/ClientIntakeForm/")]
         public IActionResult Index()
         {
-           // string html = "<h1>" + "Please fill out this form if you are a new client." + "<h1>";
-               // return Content(html, "text/html");
             List<ClientIntakeForm> intakeList = new List<ClientIntakeForm>();
 
             intakeList.Add(new ClientIntakeForm() { Name = "Client1", CurrentHairStyle = "Short", SpecialAccomidations = "None" });

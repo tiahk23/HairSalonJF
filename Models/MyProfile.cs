@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace HairSalonJF.Models
 {
-    public class ClientIntakeForm : Controller
+    public class MyProfile : Controller
     {
         public string Name { get; internal set; }
         public string CurrentHairStyle { get; set; }
         public string SpecialAccomidations { get; set; }
-
-        //add time and date requested
-        
     }
 }

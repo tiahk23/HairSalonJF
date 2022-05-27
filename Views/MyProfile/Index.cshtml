@@ -1,0 +1,50 @@
+﻿@model System.Collections.Generic.IEnumerable<HairSalonJF.Models.MyProfile>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+
+<h1>User Profile</h1>
+@if (SignInManager.IsSignedIn(User))
+//make sure this is changed to Jackies User name/email
+{
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Current Hairstyle</th>
+            <th>Special Accomidations</th>
+        </tr>
+
+        @foreach (var Item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => Item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => Item.CurrentHairStyle)</td>
+                <td>@Html.DisplayFor(modelItem => Item.SpecialAccomidations)</td>
+            </tr>
+        }
+    </table>
+}
+else
+//make sure this is changed to be not jackies sign in and only customer sign in
+{
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Current Hairstyle</th>
+        <th>Special Accomidations</th>
+    </tr>
+    @foreach (var Item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => Item.Name)</td>
+            <td>@Html.DisplayFor(modelItem => Item.CurrentHairStyle)</td>
+            <td>@Html.DisplayFor(modelItem => Item.SpecialAccomidations)</td>
+        </tr>
+    }
+
+
+
+</table>
+}
