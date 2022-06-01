@@ -3,46 +3,46 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<h1>Intake Form</h1>
-
 @if (SignInManager.IsSignedIn(User))
 //make sure this is changed to Jackies User name/email
 {
-<table class="table">
-    <tr>
-        <th>Name</th>
-        <th>Current Hairstyle</th>
-        <th>Special Accomidations</th>
-    </tr>
-
-    @foreach (var Item in Model)
-    {
+    <h1>Client Intake Forms</h1>
+    <table class="table">
         <tr>
-            <td>@Html.DisplayFor(modelItem => Item.Name)</td>
-            <td>@Html.DisplayFor(modelItem => Item.CurrentHairStyle)</td>
-            <td>@Html.DisplayFor(modelItem => Item.SpecialAccomidations)</td>
+            <th>Name</th>
+            <th>Current Hairstyle</th>
+            <th>Special Accomidations</th>
         </tr>
-    }
-</table>
+
+        @foreach (var Item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => Item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => Item.CurrentHairStyle)</td>
+                <td>@Html.DisplayFor(modelItem => Item.SpecialAccomidations)</td>
+            </tr>
+        }
+    </table>
 }
 else if (SignInManager.IsSignedIn(User))
 //make sure this is changed to be not jackies sign in and only customer sign in
 {
-<table class="table">
-    <tr>
-        <th>Name</th>
-        <th>Current Hairstyle</th>
-        <th>Special Accomidations</th>
-    </tr>
-    <tr>
-        <th>@Html.DisplayNameFor(model => model.Name) </th>
-        <th>@Html.DisplayNameFor(model => model.CurrentHairStyle) </th>
-        <th>@Html.DisplayNameFor(model => model.SpecialAccomidations) </th>
-    </tr>
+    <h1>Intake Form</h1>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Current Hairstyle</th>
+            <th>Special Accomidations</th>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Name) </th>
+            <th>@Html.DisplayNameFor(model => model.CurrentHairStyle) </th>
+            <th>@Html.DisplayNameFor(model => model.SpecialAccomidations) </th>
+        </tr>
 
 
 
-</table>
+    </table>
 }
 else
 {
