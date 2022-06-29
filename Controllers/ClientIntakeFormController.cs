@@ -1,4 +1,6 @@
-﻿using HairSalonJF.Models;
+﻿using HairSalonJF.Data;
+using HairSalonJF.Models;
+using HairSalonJF.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,23 +11,50 @@ namespace HairSalonJF.Controllers
 {
     public class ClientIntakeFormController : Controller
     {
-        public object Id { get; internal set; }
+        private ApplicationDbContext context;
+
+
+        public ClientIntakeFormController(ApplicationDbContext dbContext)
+        {
+            context = dbContext;
+        }
 
         [HttpGet]
-        [Route("/ClientIntakeForm/")]
         public IActionResult Index()
         {
-            List<ClientIntakeForm> intakeList = new List<ClientIntakeForm>();
-
-            intakeList.Add(new ClientIntakeForm() { Name = "Client1", CurrentHairStyle = "Short", SpecialAccomidations = "None" });
-
-            intakeList.Add(new ClientIntakeForm() { Name = "Client2", CurrentHairStyle = "Long", SpecialAccomidations = "N/A" });
-
-            intakeList.Add(new ClientIntakeForm() { Name = "Client3", CurrentHairStyle = "Bangs, long", SpecialAccomidations = "Wheelchair" });
-
-            intakeList.Add(new ClientIntakeForm() { Name = "Client4", CurrentHairStyle = "Bangs, short", SpecialAccomidations = "Allergic to plastic" });
-
-            return View(intakeList);
+            List<ClientIntakeForm> clientIntakeForms = context.ClientIntakeForms.ToList();
+            context.SaveChanges();
+            return View(clientIntakeForms);
         }
+
+        [HttpGet]
+        public IActionResult Add()
+        {
+            AddClientIntakeFormViewModel addClientIntakeFormViewModel = new AddClientIntakeFormViewModel();
+            return View(addClientIntakeFormViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Add(AddClientIntakeFormViewModel addClientIntakeFormViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                ClientIntakeForm newClientIntakeForm = new ClientIntakeForm
+                {
+                    Name = addClientIntakeFormViewModel.Name,
+                    Service = addClientIntakeFormViewModel.Service,
+                    Age = addClientIntakeFormViewModel.Age
+                };
+                context.ClientIntakeForms.Add(newClientIntakeForm);
+                context.SaveChanges();
+                return Redirect("/ClientIntakeForm");
+            }
+            return View(addClientIntakeFormViewModel);
+        }
+
+        
+
     }
+
 }
+
